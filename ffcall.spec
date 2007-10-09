@@ -6,7 +6,7 @@
 %define libname %mklibname %{name} %{major}
 %define libnamedev %mklibname %{name} %{major} -d
 
-Summary:	Libraries that can be used to build foreign function call interfaces.
+Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
