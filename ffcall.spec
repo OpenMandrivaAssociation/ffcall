@@ -21,6 +21,7 @@ Summary:	Libraries that can be used to build foreign function call interfaces.
 Group:          Development/Other
 Provides:	%{libname}-devel
 Provides:	libffcall-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}
 
 %description
 This is a collection of four libraries which can be used to build
