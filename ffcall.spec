@@ -27,7 +27,6 @@ Conflicts:      %mklibname %{name} 0 -d
 %package        -n %{libnamedev}
 Summary:	Libraries that can be used to build foreign function call interfaces. 
 Group:          Development/Other
-Provides:	%{libname}-devel
 Provides:	%{libname_orig}-devel 
 Provides:	%{name}-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}
