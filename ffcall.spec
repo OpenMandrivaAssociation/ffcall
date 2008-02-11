@@ -95,12 +95,16 @@ are installed in the proper place. Also it compiles on cygwin and mingw32.
 make
 
 %install
+rm -rf ${buildroot}
 # make install does not create all necessary directories
 mkdir -p %buildroot %buildroot/%_includedir %buildroot/%_libdir %buildroot/%_mandir
 %makeinstall_std
 
 mkdir -p %{buildroot}%{_defaultdocdir}/%{libnamedev}
 mv %{buildroot}/usr/share/html %{buildroot}%{_defaultdocdir}/%{libnamedev}/html
+
+%clean
+rm -rf ${buildroot}
 
 %post -n %{libname} -p /sbin/ldconfig
 %postun	-n %{libname} -p /sbin/ldconfig
