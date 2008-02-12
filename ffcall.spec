@@ -18,14 +18,14 @@ Source:		ftp://ftp.santafe.edu/pub/gnu/%{name}-%{version}.tar.bz2
 Buildrequires:	autoconf2.5
 
 %package 	-n %{libname}
-Summary:        Libraries that can be used to build foreign function call interfaces.
+Summary:        Libraries that can be used to build foreign function call interfaces
 Group:          Development/Other
 BuildRoot:      %{_tmppath}/%{name}-%{version}
 Provides:	%{libname_orig} = %{version}-%{release}
 Conflicts:      %mklibname %{name} 0 -d
 
 %package        -n %{libnamedev}
-Summary:	Libraries that can be used to build foreign function call interfaces. 
+Summary:	Libraries that can be used to build foreign function call interfaces
 Group:          Development/Other
 Provides:	%{libname_orig}-devel 
 Provides:	%{name}-devel
