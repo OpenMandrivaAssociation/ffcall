@@ -1,7 +1,7 @@
 %define	name	ffcall
 %define libname_orig    lib%{name}
 %define	version	1.10
-%define	release	%mkrel 3
+%define	release	%mkrel 4
 
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -30,7 +30,7 @@ Group:          Development/Other
 Provides:	%{libname_orig}-devel 
 Provides:	%{name}-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}
-Conflicts:	%mklibname %{name} 0 -d
+Obsoletes:	%mklibname %{name} 0 -d
 
 %description
 This is a collection of four libraries which can be used to build
