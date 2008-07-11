@@ -91,7 +91,7 @@ are installed in the proper place. Also it compiles on cygwin and mingw32.
 %setup -q -n %{name}-%{version}
 
 %build
-%configure --enable-shared
+%configure2_5x --enable-shared
 make
 
 %install
