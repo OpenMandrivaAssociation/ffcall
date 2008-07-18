@@ -1,7 +1,7 @@
 %define	name	ffcall
 %define libname_orig    lib%{name}
 %define	version	1.10
-%define	release	%mkrel 4
+%define	release	%mkrel 5
 
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -91,6 +91,7 @@ are installed in the proper place. Also it compiles on cygwin and mingw32.
 %setup -q -n %{name}-%{version}
 
 %build
+export CFLAGS="%{optflags} -fPIC"
 %configure2_5x --enable-shared
 make
 
