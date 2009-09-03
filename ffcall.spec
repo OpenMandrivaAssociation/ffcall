@@ -1,7 +1,7 @@
 %define	name	ffcall
 %define libname_orig    lib%{name}
 %define	version	1.10
-%define	release	%mkrel 5
+%define	release	%mkrel 6
 
 %define major 0
 %define libname %mklibname %{name} %{major}
