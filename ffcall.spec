@@ -1,7 +1,7 @@
 %define	name	ffcall
 %define libname_orig    lib%{name}
 %define	version	1.10
-%define	release	%mkrel 6
+%define	release	%mkrel 7
 
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -15,7 +15,7 @@ License:	GPLv2
 Group:		Development/C
 URL:		ftp://ftp.santafe.edu/pub/gnu/
 Source:		ftp://ftp.santafe.edu/pub/gnu/%{name}-%{version}.tar.bz2
-Buildrequires:	autoconf2.5
+Patch0:		ffcall-make-jN.patch
 
 %package 	-n %{libname}
 Summary:        Libraries that can be used to build foreign function call interfaces
@@ -89,11 +89,12 @@ are installed in the proper place. Also it compiles on cygwin and mingw32.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
 %build
 export CFLAGS="%{optflags} -fPIC"
 %configure2_5x --enable-shared
-make
+%make
 
 %install
 rm -rf ${buildroot}
