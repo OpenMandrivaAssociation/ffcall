@@ -1,7 +1,7 @@
 %define	name	ffcall
 %define libname_orig    lib%{name}
 %define	version	1.10
-%define	release	%mkrel 7
+%define	release	%mkrel 8
 
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -16,20 +16,20 @@ Group:		Development/C
 URL:		ftp://ftp.santafe.edu/pub/gnu/
 Source:		ftp://ftp.santafe.edu/pub/gnu/%{name}-%{version}.tar.bz2
 Patch0:		ffcall-make-jN.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %package 	-n %{libname}
 Summary:        Libraries that can be used to build foreign function call interfaces
 Group:          Development/Other
-BuildRoot:      %{_tmppath}/%{name}-%{version}
 Provides:	%{libname_orig} = %{version}-%{release}
 Conflicts:      %mklibname %{name} 0 -d
 
 %package        -n %{libnamedev}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:          Development/Other
+Requires:	%{libname} = %{version}
 Provides:	%{libname_orig}-devel 
 Provides:	%{name}-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}
 Obsoletes:	%mklibname %{name} 0 -d
 
 %description
