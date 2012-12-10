@@ -1,7 +1,5 @@
 %define	name	ffcall
 %define libname_orig    lib%{name}
-%define	version	1.10
-%define	release	%mkrel 8
 
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -9,14 +7,13 @@
 
 Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Version:	1.10
+Release:	9
 License:	GPLv2
 Group:		Development/C
 URL:		ftp://ftp.santafe.edu/pub/gnu/
 Source:		ftp://ftp.santafe.edu/pub/gnu/%{name}-%{version}.tar.bz2
 Patch0:		ffcall-make-jN.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %package 	-n %{libname}
 Summary:        Libraries that can be used to build foreign function call interfaces
@@ -97,23 +94,12 @@ export CFLAGS="%{optflags} -fPIC"
 %make
 
 %install
-rm -rf ${buildroot}
 # make install does not create all necessary directories
 mkdir -p %buildroot %buildroot/%_includedir %buildroot/%_libdir %buildroot/%_mandir
 %makeinstall_std
 
 mkdir -p %{buildroot}%{_defaultdocdir}/%{libnamedev}
 mv %{buildroot}/usr/share/html %{buildroot}%{_defaultdocdir}/%{libnamedev}/html
-
-%clean
-rm -rf ${buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun	-n %{libname} -p /sbin/ldconfig
-%endif
 
 %files -n %{libname}
 %{_libdir}/*.so.*
@@ -124,5 +110,65 @@ rm -rf ${buildroot}
 %_includedir/*
 %{_libdir}/*.so
 %{_libdir}/*.a
-%{_libdir}/*.la
 %{_mandir}/man3/*
+
+
+%changelog
+* Sat Sep 18 2010 Funda Wang <fwang@mandriva.org> 1.10-8mdv2011.0
++ Revision: 579336
+- add missing requires
+
+* Tue Aug 24 2010 Funda Wang <fwang@mandriva.org> 1.10-7mdv2011.0
++ Revision: 572780
+- add patch to build in parallel
+
+* Thu Sep 03 2009 Thierry Vignaud <tv@mandriva.org> 1.10-6mdv2010.0
++ Revision: 428718
+- rebuild
+
+* Fri Jul 18 2008 Funda Wang <fwang@mandriva.org> 1.10-5mdv2009.0
++ Revision: 238018
+- Build with -fPIC
+
+* Fri Jul 11 2008 Funda Wang <fwang@mandriva.org> 1.10-4mdv2009.0
++ Revision: 233843
+- should be obsoletes rather than conflicts
+
+* Fri Jul 11 2008 Funda Wang <fwang@mandriva.org> 1.10-3mdv2009.0
++ Revision: 233827
+- use configure2_5x
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Tue Feb 12 2008 Frederik Himpe <fhimpe@mandriva.org> 1.10-3mdv2008.1
++ Revision: 166454
+- Fix summary
+- Clean buildroot
+- Fix devel package provides
+- Remove shared libraries from -devel package and put them in lib package
+- Adapt devel package name to new policy
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+    - fix summary-ended-with-dot
+
+
+* Mon Apr 02 2007 Pascal Terjan <pterjan@mandriva.org> 1.10-2mdv2007.1
++ Revision: 150177
+- Use the macros, this avoids a lot of hacks and fixes build on x86_64
+- Use mkrel
+- Use autoconf2.5
+- Fix group
+- Don't have 2 dirs for the doc
+- Import ffcall
+
+* Sat Jun 05 2004 Lenny Cartier <lenny@mandrakesoft.com> 1.10-1mdk
+- 1.10
+
+* Sat May 15 2004 Lenny Cartier <lenny@mandrakesoft.com> 1.9-1mdk
+- 1.9
+
