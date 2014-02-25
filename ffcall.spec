@@ -6,7 +6,7 @@
 Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		ffcall
 Version:	1.10
-Release:	10
+Release:	11
 License:	GPLv2+
 Group:		System/Libraries
 Url:		ftp://ftp.santafe.edu/pub/gnu/
@@ -31,7 +31,7 @@ are installed in the proper place. Also it compiles on cygwin and mingw32.
 %package -n %{libavcall}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:		System/Libraries
-Conflicts:	%{_lib}ffcall0 < 1.10
+Conflicts:	%{_lib}ffcall0 < 1.10-11
 
 %description -n %{libavcall}
 This is a collection of four libraries which can be used to build
@@ -54,8 +54,8 @@ are installed in the proper place. Also it compiles on cygwin and mingw32.
 %package -n %{libcallback}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:		System/Libraries
-Conflicts:	%{_lib}ffcall0 < 1.10
-Obsoletes:	%{_lib}ffcall0 < 1.10
+Conflicts:	%{_lib}ffcall0 < 1.10-11
+Obsoletes:	%{_lib}ffcall0 < 1.10-11
 
 %description -n %{libcallback}
 This is a collection of four libraries which can be used to build
