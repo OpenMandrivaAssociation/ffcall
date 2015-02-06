@@ -6,7 +6,7 @@
 Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		ffcall
 Version:	1.10
-Release:	11
+Release:	12
 License:	GPLv2+
 Group:		System/Libraries
 Url:		ftp://ftp.santafe.edu/pub/gnu/
