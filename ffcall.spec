@@ -3,15 +3,20 @@
 %define libcallback %mklibname callback %{major}
 %define devname %mklibname %{name} -d
 
+%define cvs 20120424cvs
+
 Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		ffcall
 Version:	1.10
-Release:	12
+Release:	12.%cvs.1
 License:	GPLv2+
 Group:		System/Libraries
-Url:		ftp://ftp.santafe.edu/pub/gnu/
-Source:		ftp://ftp.santafe.edu/pub/gnu/%{name}-%{version}.tar.bz2
+Url:		http://www.gnu.org/software/libffcall
+Source:		%{name}-%{cvs}.tar.xz
 Patch0:		ffcall-make-jN.patch
+# Upstream is dead, so this patch will not be sent.  Update some uses of OABI
+# on ARM to their EABI equivalents.
+Patch1:         %{name}-arm.patch
 
 %description
 This is a collection of four libraries which can be used to build
@@ -95,12 +100,12 @@ Development files for ffcall library.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
-%patch0 -p1
+%setup -q -n ffcall
+%apply_patches
 
 %build
 export CFLAGS="%{optflags} -fPIC"
-%configure2_5x \
+%configure \
 	--enable-shared
 %make
 
