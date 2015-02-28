@@ -104,6 +104,11 @@ Development files for ffcall library.
 %apply_patches
 
 %build
+%ifarch %arm
+export CC=gcc
+export CXX=g++
+%endif
+
 export CFLAGS="%{optflags} -fPIC"
 %configure \
 	--enable-shared
