@@ -101,7 +101,7 @@ Development files for ffcall library.
 
 %prep
 %setup -q -n ffcall
-%apply_patches
+%autopatch -p1
 
 %build
 %ifarch %arm
