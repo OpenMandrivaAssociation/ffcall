@@ -1,13 +1,14 @@
---- ffcall-1.10/callback/Makefile.in.orig	2003-10-01 21:46:19.000000000 +0200
-+++ ffcall-1.10/callback/Makefile.in	2010-08-24 14:58:37.000000000 +0200
+--- a/callback/Makefile.in
++++ b/callback/Makefile.in
 @@ -51,6 +51,10 @@
  all-subdirs : force
- 	cd @subdir@ && $(MAKE) all
+ 	cd @callback_subdir@ && $(MAKE) all
  
 +vacall_r/libvacall.la: all-subdirs
 +
 +trampoline_r/libtrampoline.la: all-subdirs
 +
- callback.h :
- 	$(LN_S) $(srcdir)/callback.h.in callback.h
+ callback-libapi.lo : $(srcdir)/callback-libapi.c $(srcdir)/callback.h $(srcdir)/trampoline_r/trampoline_r.h ../config.h
+ 	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) -I$(srcdir)/trampoline_r $(CPPFLAGS) $(CFLAGS) -c $(srcdir)/callback-libapi.c
  
+
