@@ -1,22 +1,20 @@
 %define major 0
-%define libavcall %mklibname avcall %{major}
-%define libcallback %mklibname callback %{major}
-%define devname %mklibname %{name} -d
-
-%define cvs 20120424cvs
+%define libavcall	%mklibname avcall %{major}
+%define libcallback	%mklibname callback %{major}
+%define devname		%mklibname %{name} -d
 
 Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		ffcall
-Version:	1.10
-Release:	12.%cvs.1
+Version:	2.4
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
-Url:		http://www.gnu.org/software/libffcall
-Source:		%{name}-%{cvs}.tar.xz
+Url:		http://www.gnu.org/software/lib%{name}
+Source:		https://ftp.gnu.org/gnu/libffcall/lib%{name}-%{version}.tar.gz
 Patch0:		ffcall-make-jN.patch
-# Upstream is dead, so this patch will not be sent.  Update some uses of OABI
+# Upstream is dead, so this patch will not be sent. Update some uses of OABI
 # on ARM to their EABI equivalents.
-Patch1:         %{name}-arm.patch
+#Patch1:	 %{name}-arm.patch
 
 %description
 This is a collection of four libraries which can be used to build
@@ -100,8 +98,7 @@ Development files for ffcall library.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n ffcall
-%autopatch -p1
+%autosetup -p1 -n lib%{name}-%{version}
 
 %build
 %ifarch %arm
@@ -109,20 +106,20 @@ export CC=gcc
 export CXX=g++
 %endif
 
-export CFLAGS="%{optflags} -fPIC"
-%configure \
-	--enable-shared
-%make
+#export CFLAGS="%{optflags} -fPIC"
+%configure
+%make_build
 
 %install
 # make install does not create all necessary directories
 mkdir -p %{buildroot}%{_includedir}
 mkdir -p %{buildroot}%{_libdir}
 mkdir -p %{buildroot}%{_mandir}
-%makeinstall_std
+%make_install
+
+# fix permissions
+chmod 0755 %{buildroot}%{_libdir}/*.so.*
 
 mkdir -p %{buildroot}%{_defaultdocdir}/%{devname}
 mv %{buildroot}%{_datadir}/html %{buildroot}%{_defaultdocdir}/%{devname}/html
-
-chmod 0755 %{buildroot}%{_libdir}/*.so.*
 
