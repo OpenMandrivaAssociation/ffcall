@@ -13,7 +13,7 @@ Version:	2.4
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
-Url:		http://www.gnu.org/software/lib%{name}
+Url:		https://www.gnu.org/software/lib%{name}
 Source:		https://ftp.gnu.org/gnu/libffcall/lib%{name}-%{version}.tar.gz
 Patch0:		ffcall-make-jN.patch
 # Upstream is dead, so this patch will not be sent. Update some uses of OABI
