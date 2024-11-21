@@ -1,27 +1,25 @@
 %define major 1
-%define oldmajor 0
-%define libavcall		%mklibname avcall		%{major}
-%define libcallback		%mklibname callback		%{major}
-%define libtrampoline	%mklibname trampoline	%{major}
-%define libffcall		%mklibname ffcall		%{oldmajor}
+%define ffcallmajor 0
+%define oldlibavcall	%mklibname avcall 1
+%define libavcall	%mklibname avcall
+%define oldlibcallback	%mklibname callback 1
+%define libcallback	%mklibname callback
+%define oldlibtrampoline %mklibname trampoline 1
+%define libtrampoline	%mklibname trampoline
+%define oldlibffcall	%mklibname ffcall 0
+%define libffcall	%mklibname ffcall
 
-%define devname			%mklibname %{name} -d
+%define devname		%mklibname %{name} -d
 
 Summary:	Libraries that can be used to build foreign function call interfaces
 Name:		ffcall
-Version:	2.4
+Version:	2.5
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		https://www.gnu.org/software/lib%{name}
 Source:		https://ftp.gnu.org/gnu/libffcall/lib%{name}-%{version}.tar.gz
 Patch0:		ffcall-make-jN.patch
-# Upstream is dead, so this patch will not be sent. Update some uses of OABI
-# on ARM to their EABI equivalents.
-#Patch1:	 %{name}-arm.patch
-# (upstream commit 580f0bb144c0d63560c61229291e172e55971437
-Patch10:	ffcall.git-03c892dd77f910220da7621e1596635890f5e146.patch
-Patch11:	ffcall.git-580f0bb144c0d63560c61229291e172e55971437.patch
 
 %description
 This is a collection of four libraries which can be used to build
@@ -45,7 +43,7 @@ use libffcall instead.
 %package -n %{libavcall}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:		System/Libraries
-Conflicts:	%{_lib}ffcall0 < 1.10-11
+%rename %{oldlibavcall}
 
 %description -n %{libavcall}
 This is a collection of four libraries which can be used to build
@@ -72,8 +70,7 @@ use libffcall instead.
 %package -n %{libcallback}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:		System/Libraries
-Conflicts:	%{_lib}ffcall0 < 1.10-11
-Obsoletes:	%{_lib}ffcall0 < 1.10-11
+%rename %{oldlibcallback}
 
 %description -n %{libcallback}
 This is a collection of four libraries which can be used to build
@@ -100,8 +97,7 @@ use libffcall instead.
 %package -n %{libffcall}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:		System/Libraries
-Conflicts:	%{_lib}ffcall0 < 1.10-11
-Obsoletes:	%{_lib}ffcall0 < 1.10-11
+%rename %{oldlibffcall}
 
 %description -n %{libffcall}
 This is a collection of four libraries which can be used to build
@@ -121,14 +117,13 @@ and libcallback are installed as well. But they are deprecated;
 use libffcall instead.
 
 %files -n %{libffcall}
-%{_libdir}/libffcall.so.%{oldmajor}*
+%{_libdir}/libffcall.so.%{ffcallmajor}*
 
 #----------------------------------------------------------------------------
 %package -n %{libtrampoline}
 Summary:	Libraries that can be used to build foreign function call interfaces
 Group:		System/Libraries
-Conflicts:	%{_lib}ffcall0 < 1.10-11
-Obsoletes:	%{_lib}ffcall0 < 1.10-11
+%rename %{oldlibtrampoline}
 
 %description -n %{libtrampoline}
 This is a collection of four libraries which can be used to build
@@ -175,13 +170,10 @@ Development files for ffcall library.
 %prep
 %autosetup -p1 -n lib%{name}-%{version}
 
-%build
-%ifarch %arm
-export CC=gcc
-export CXX=g++
-%endif
-
+%conf
 %configure
+
+%build
 %make_build -j1
 
 %install
