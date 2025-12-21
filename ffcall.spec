@@ -21,6 +21,11 @@ Url:		https://www.gnu.org/software/lib%{name}
 Source:		https://ftp.gnu.org/gnu/libffcall/lib%{name}-%{version}.tar.gz
 Patch0:		ffcall-make-jN.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 This is a collection of four libraries which can be used to build
 foreign function call interfaces in embedded interpreters.
